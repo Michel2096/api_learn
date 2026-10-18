@@ -1,0 +1,54 @@
+# ---- Dependencias --------------------------------------------------------
+node_modules/
+
+# ---- Builds y cachés -----------------------------------------------------
+dist/
+build/
+.vite/
+*.tsbuildinfo
+coverage/
+
+# ---- Variables de entorno (credenciales reales nunca al repo) ------------
+.env
+.env.*
+!.env.example
+
+# ---- Logs ----------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- Datos locales de Postgres (si alguna vez se monta como carpeta) -----
+pgdata/
+*.dump
+*.backup
+
+# ---- Editores y sistema operativo ----------------------------------------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Herramientas locales ------------------------------------------------
+.claude/settings.local.json
+
+
+node_modules/
+**/node_modules/
+
+.env
+.env.*
+!.env.example
+
+dist/
+build/
+coverage/
+
+.DS_Store
+Thumbs.db

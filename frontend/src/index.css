@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Share Tech Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html,
+body {
+  background-color: #000;
+  color: var(--color-neutral-200);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grid tecnológico: líneas blancas casi invisibles + halo superior */
+.bat-grid {
+  background-color: #000;
+  background-image:
+    radial-gradient(ellipse 80% 45% at 50% 0%, rgb(255 255 255 / 0.09), transparent 70%),
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Blancos relucientes */
+.glow {
+  text-shadow: 0 0 6px rgb(255 255 255 / 0.5), 0 0 22px rgb(255 255 255 / 0.22);
+}
+.glow-strong {
+  text-shadow: 0 0 3px #fff, 0 0 14px rgb(255 255 255 / 0.75), 0 0 40px rgb(255 255 255 / 0.35);
+}
+
+/* Barras de "tiempo extra": rayas en lugar de color */
+.stripes {
+  background-image: repeating-linear-gradient(-45deg, #fff 0 6px, rgb(255 255 255 / 0.15) 6px 12px);
+}
+
+/* Eje de la línea de tiempo con un destello que lo recorre */
+.timeline-line {
+  background: linear-gradient(to bottom, transparent, rgb(255 255 255 / 0.3) 40px, rgb(255 255 255 / 0.3) calc(100% - 40px), transparent);
+}
+.timeline-line::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  width: 3px;
+  height: 90px;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, transparent, #fff, transparent);
+  box-shadow: 0 0 12px 1px rgb(255 255 255 / 0.6);
+  animation: timeline-scan 5s linear infinite;
+}
+@keyframes timeline-scan {
+  from { top: 0; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  to   { top: calc(100% - 90px); opacity: 0; }
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+.modal-in { animation: modal-in 220ms ease-out; }
+
+/* Oculta las flechas nativas de los <input type="number"> del Bat-cronómetro */
+.no-spin::-webkit-outer-spin-button,
+.no-spin::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.no-spin { -moz-appearance: textfield; appearance: textfield; }
+
+/* Batseñal: foco de luz con el emblema recortado en negro y un halo que respira */
+.bat-signal {
+  background: radial-gradient(circle at 50% 45%, #fff 0%, #f1f1f1 42%, #bdbdbd 66%, rgb(255 255 255 / 0.15) 71%, transparent 72%);
+  box-shadow: 0 0 40px 6px rgb(255 255 255 / 0.25), 0 0 120px 30px rgb(255 255 255 / 0.08);
+  animation: signal-breathe 6s ease-in-out infinite;
+}
+.bat-signal::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgb(255 255 255 / 0.12), transparent 60%);
+  z-index: -1;
+}
+@keyframes signal-breathe {
+  0%, 100% { box-shadow: 0 0 40px 6px rgb(255 255 255 / 0.25), 0 0 120px 30px rgb(255 255 255 / 0.08); }
+  50%      { box-shadow: 0 0 55px 10px rgb(255 255 255 / 0.35), 0 0 160px 50px rgb(255 255 255 / 0.12); }
+}
+
+/* Líneas de monitor CRT muy sutiles sobre toda la página */
+.scanlines {
+  background: repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 3px);
+  mix-blend-mode: screen;
+}
+
+/* Pestañas: subrayado que se ilumina en la activa */
+.nav-tab::after {
+  content: "";
+  position: absolute;
+  inset: auto 12px -1px;
+  height: 2px;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow: 0 0 12px 1px rgb(255 255 255 / 0.8);
+  transform: scaleX(0);
+  transition: transform 250ms ease-out;
+}
+.nav-tab.is-active::after { transform: scaleX(1); }
+
+/* Marco HUD: esquinas encendidas en paneles destacados */
+.hud-frame { position: relative; }
+.hud-frame::before,
+.hud-frame::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  border-color: rgb(255 255 255 / 0.85);
+}
+.hud-frame::before { top: -1px; left: -1px; border-top: 1.5px solid; border-left: 1.5px solid; border-top-left-radius: 0.5rem; }
+.hud-frame::after { bottom: -1px; right: -1px; border-bottom: 1.5px solid; border-right: 1.5px solid; border-bottom-right-radius: 0.5rem; }
+
+/* Tarjetas: un barrido de luz cruza al pasar el ratón */
+.hud-card { position: relative; overflow: hidden; }
+.hud-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.06) 50%, transparent 70%);
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+.hud-card:hover::after { transform: translateX(100%); transition: transform 700ms ease-out; }
+
+@keyframes tab-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.tab-in { animation: tab-in 260ms ease-out; }
+
+select option { background: #0a0a0a; }
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-in, .tab-in, .bat-signal { animation: none; }
+  .timeline-line::after { display: none; }
+  .hud-card:hover::after { transition: none; }
+}
